@@ -11,6 +11,6 @@
   "d1_databases": [{
     "binding": "DB", "database_name": "cityrise-db",
     // Replace with the database_id returned by `npx wrangler d1 create cityrise-db`.
-    "database_id": "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+    "database_id": "aa4e61d7-4b36-42b5-8687-ad5e1f722ae3"
   }]
 }
