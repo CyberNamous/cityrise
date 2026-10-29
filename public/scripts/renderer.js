@@ -52,8 +52,10 @@ export class Renderer {
    if(type==='clinic'){const p=coord(1,1,height+5);g.fillStyle='#d76f64';g.fillRect(p.x-9,p.y-3,18,6);g.fillRect(p.x-3,p.y-9,6,18);}
    if(type==='fire'){box(0.45,c.h-0.24,0.8,0.09,14,'#af4f49');}
   }
-  this.cache.set(key,art);return art;
+  this.cache.set(key,art);this.loadArt(type,level,key);return art;
  }
+ // Upgrade the procedural fallback to the SVG sprite once it loads; failures keep the fallback.
+ loadArt(type,level,key){this.artRequested??=new Set();if(this.artRequested.has(key))return;this.artRequested.add(key);const img=new Image();img.onload=()=>{if(this.destroyed)return;this.cache.set(key,img);this.dirty=true;};img.onerror=()=>{};img.src=`/assets/buildings/${type}-${level}.svg`;}
  draw(time){
   const s=this.getState(),c=this.ctx;if(!s)return;
   // Repaint the static scene only on edits, camera moves, previews, or monthly ticks.
